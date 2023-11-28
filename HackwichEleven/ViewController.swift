@@ -8,7 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var targetLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
     
     var currentValue: Int = 0
@@ -24,17 +25,20 @@ class ViewController: UIViewController {
         startNewRound()
         
     }
-
+    
     @IBAction func myGuessButtonPressed(_ sender: Any) {
         
-        let message = "The value is: \(currentValue)" + "\nThe target value is: \(targetValue)"
+        //let message = "The value is: \(currentValue)" + "\nThe target value is: \(targetValue)"
+        let message = "Your Guess is: \(currentValue)" + "\nThe Target Value for This Round is: \(targetValue)"
         
-        let alert = UIAlertController(title: "Hello World", message: message, preferredStyle:.alert)
-                       
-        let action = UIAlertAction(title: "Awesome", style: .default, handler: nil)
-                       
+        //let alert = UIAlertController(title: "Hello World", message: message, preferredStyle:.alert)
+        let alert = UIAlertController(title: "Guess The Number Game", message: message, preferredStyle:.alert)
+        
+        //let action = UIAlertAction(title: "Awesome", style: .default, handler: nil)
+        let action = UIAlertAction(title: "New Round", style: .default, handler: nil)
+        
         alert.addAction(action)
-                       
+        
         present(alert, animated: true, completion: nil)
         
         startNewRound()
@@ -51,6 +55,17 @@ class ViewController: UIViewController {
     {
         targetValue = Int.random(in: 0...100)
         currentValue = Int((slider.value))
+
+        updateTargetLabel()
     }
+    
+    func updateTargetLabel()
+    {
+        targetLabel.text = "\(targetValue)"
+    }
+    
+    
+    
 }
+
 
